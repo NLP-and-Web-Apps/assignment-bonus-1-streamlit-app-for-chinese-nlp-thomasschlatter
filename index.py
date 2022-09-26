@@ -1,4 +1,4 @@
-# D07142002、徐樂德、stream cloud 的連結。
+# D07142002、徐樂德、https://thomasschlatter-assigment-1-index-yb1y7x.streamlitapp.com/
 
 import streamlit as st
 from snownlp import SnowNLP
