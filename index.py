@@ -1,4 +1,4 @@
-# revised from T.Richards' streamlit example
+# D07142002、徐樂德、stream cloud 的連結。
 
 import streamlit as st
 from snownlp import SnowNLP
