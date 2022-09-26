@@ -7,10 +7,10 @@ if 'sentiment' not in st.session_state:
     st.session_state.sentiment = "😐"
 
 if 'text' not in st.session_state:
-    st.session_state.text = '今天是周六。'
+    st.session_state.text = ""
  
 st.title('Chinese Sentiment Analyzer') 
-st.write('😄 😊 😐 😟 😩')
+st.markdown('😄😊😐😟😩') 
 
 def setText(txt):
     st.session_state.text = txt
@@ -25,8 +25,26 @@ def sentiment(txt):
     else:
         return '😐'
 
-st.session_state.text = st.text_area('Text to analyze','今天是周六。')
+def sentimentToAlpha(txt):
+    returnTxt = ""
+    sentiment = SnowNLP(txt)
+    for i in range(0,len(sentiment.words)):
+        wordSentiment = SnowNLP(sentiment.words[i]).sentiments
+        if wordSentiment > 0.5:
+            colorString = '0, 255, 0'
+            alpha = wordSentiment
+        elif wordSentiment < 0.5:
+            colorString = '255, 0, 0'
+            alpha = wordSentiment
+        else:
+            colorString = '128, 128, 128'
+            alpha = 0.2
+        returnTxt += f'<span style="background-color:rgba({colorString}, {alpha});">{sentiment.words[i]}</span>'
+    return returnTxt
+
+st.session_state.text = st.text_area('Text to analyze','你好。去死吧。')
 
 st.write('Sentiment:')
-st.write('#', sentiment(st.session_state.text))
+st.markdown("<h1>"+sentiment(st.session_state.text)+"</h1>", unsafe_allow_html=True)
+st.markdown(sentimentToAlpha(st.session_state.text), unsafe_allow_html=True)
 
